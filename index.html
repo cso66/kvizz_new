@@ -41,13 +41,20 @@
   .row iframe {
     flex: 1; min-width: 500px; height: 500px;
   }
-  /* JAVÍTOTT: NAGY column iframe-ek */
   .column iframe {
-    width: 100%;
-    max-width: 1620px;
-    height: 820px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 1600px;  /* Pontosan a fig méret */
+  height: 850px;      /* Fig height + padding */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Speciális animáció még nagyobb */
+.column iframe[src*="animacio"] {
+  max-width: 1600px !important;
+  height: 900px !important;
+}
+
   }
   /* Mobile */
   @media (max-width: 768px) {
@@ -84,8 +91,8 @@
 
     <!-- Egyedi -->
     <div class="column">
-      <iframe src="animacio_lassitva.html"></iframe>
-    </div>
+  <iframe src="animacio_lassitva4.html"></iframe>  <!-- Automatikusan nagy! -->
+</div>
 
     <!-- Egyéb -->
     <div class="row">
