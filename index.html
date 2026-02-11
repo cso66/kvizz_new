@@ -54,6 +54,12 @@
     .row { flex-direction: column; }
     .row iframe, .column iframe { height: 400px; min-width: unset; }
   }
+  /* Animációhoz speciális nagy iframe */
+.column iframe[src*="animacio"] {
+  width: 100%; max-width: 1800px !important;
+  height: 900px !important;
+}
+
 </style>
 </head>
 <body>
