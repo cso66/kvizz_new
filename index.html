@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kvíz vizualizációk 2024</title>
+  <title>Kvíz vizualizációk 2024/25</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -41,7 +41,14 @@
       transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
     .row iframe { flex: 1; min-width: 500px; height: 500px; }
-    .column iframe { width: 100%; max-width: 900px; height: 600px; }
+    ..column iframe {
+  width: 100%;
+  max-width: 1620px;  /* Teljes szélesség */
+  height: 820px;      /* Magasság dupla */
+  border: none;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
     @media (max-width: 768px) {
       .row { flex-direction: column; }
       iframe { min-width: unset; height: 400px; }
@@ -50,7 +57,7 @@
 </head>
 <body>
   <div class="wrapper">
-    <h1>🏆 Kvíz vizualizációk 2025/2</h1>
+    <h1>🏆 Kvíz vizualizációk 2024/25</h1>
     
     <!-- Nagy diagramok -->
     <div class="column">
@@ -81,7 +88,7 @@
     <!-- Egyéb -->
     <div class="row">
       <iframe src="chord_diagram.html"></iframe>
-      <iframe src="heat_2025.html"></iframe>
+      <iframe src="heatm_2025.html"></iframe>
     </div>
   </div>
 </body>
