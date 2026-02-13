@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kvíz Dashboard – Optimális</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+               min-height: 100vh; overflow-x: hidden; }
+
+        .header { background: linear-gradient(90deg, #02378B 0%, #F6019D 100%); color: white; 
+                  padding: 15px 25px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .title { font-size: 24px; font-weight: bold; margin-bottom: 5px; }
+        .subtitle { font-size: 14px; opacity: 0.9; }
+        .toggle-buttons { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+        .toggle-btn { padding: 12px 20px; border: none; border-radius: 25px; background: rgba(255,255,255,0.2); 
+                      color: white; cursor: pointer; font-weight: bold; font-size: 15px; transition: all 0.3s; 
+                      backdrop-filter: blur(10px); }
+        .toggle-btn:hover { background: rgba(255,255,255,0.4); transform: translateY(-2px); }
+        .toggle-btn.active { background: white; color: #02378B; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transform: translateY(-2px); }
+
+        .main-content { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+
+        .section { margin-bottom: 40px; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+                   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .section.hidden { display: none !important; }
+
+        .section-title { background: rgba(255,255,255,0.9); padding: 20px; font-size: 22px; font-weight: bold; 
+                        color: #02378B; border-radius: 16px 16px 0 0; margin: 0; 
+                        display: flex; justify-content: space-between; align-items: center; }
+        .section-icon { font-size: 28px; margin-right: 15px; }
+
+        .chart-container { padding: 25px; background: white; }
+        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+        .chart-full { grid-column: 1 / -1; margin-bottom: 20px; }
+
+        /* OPTIMÁLIS MAGASSÁGOK */
+        .map-chart iframe { width: 100%; height: 700px; min-height: 650px; border: none; display: block; }
+        .chart-item iframe { width: 100%; height: 550px; min-height: 500px; border: none; display: block; }
+        .sunburst-chart iframe { height: 850px !important; min-height: 800px !important; }  /* Még nagyobb! */
+
+        .chart-item { border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: transform 0.3s ease; }
+        .chart-item:hover { transform: translateY(-5px); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) { .charts-grid { grid-template-columns: 1fr; gap: 20px; } }
+        @media (max-width: 1024px) { 
+            .map-chart iframe { height: 650px; }
+            .chart-item iframe { height: 500px; }
+            .sunburst-chart iframe { height: 750px !important; }
+        }
+        @media (max-width: 768px) { 
+            .main-content { padding: 20px 15px; }
+            .header { padding: 15px 20px; }
+            .toggle-buttons { justify-content: center; }
+            .map-chart iframe { height: 550px; }
+            .chart-item iframe { height: 450px; }
+            .sunburst-chart iframe { height: 650px !important; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="title">🎯 Kvíz 2025/2 Dashboard</div>
+                    </div>
+        <div class="toggle-buttons">
+            <button class="toggle-btn active" id="show-all">👁️ Minden látható</button>
+            <button class="toggle-btn" id="hide-map">🗺️ Map elrejt</button>
+            <button class="toggle-btn" id="show-charts">📊 Csak grafikonok</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- MAP – 700px -->
+        <div class="section map-section" id="map-section">
+            <h2 class="section-title">
+                <span><span class="section-icon">🗺️</span> Városszerte történő okítások helyszínei</span>
+            </h2>
+            <div class="chart-container map-chart">
+                <iframe src="kviz_terkep.html" title="Kvíz Helyszínek"></iframe>
+            </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="section charts-section" id="charts-section">
+            <h2 class="section-title">
+                <span><span class="section-icon">📊</span> Játékosok és játékok</span>
+            </h2>
+            <div class="chart-container">
+                <!-- Játékosok Bar – 550px -->
+                <div class="chart-item">
+                    <iframe src="jatekosok_chart.html" title="Játékosok Részvételeinek száma"></iframe>
+                </div>
+
+                <div class="charts-grid">
+                    <!-- Sankey – 550px -->
+                    <div class="chart-item">
+                        <iframe src="sankey2025_2.html" title="Helyszíneken szerzett pontok"></iframe>
+                    </div>
+
+                    <!-- Radar – 550px -->
+                    <div class="chart-item">
+                        <iframe src="radar_2025_2.html" title="Radar Elemzés"></iframe>
+                    </div>
+                </div>
+
+                <!-- SUNBURST – 850px DUPLA SZÉLESSÉG -->
+                <div class="chart-full sunburst-chart">
+                    <div class="chart-item">
+                        <iframe src="sunburn_allin.html" title="Sunburst All In"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle script változatlan...
+        const showAllBtn = document.getElementById('show-all');
+        const hideMapBtn = document.getElementById('hide-map');
+        const showChartsBtn = document.getElementById('show-charts');
+        const mapSection = document.getElementById('map-section');
+        const chartsSection = document.getElementById('charts-section');
+
+        function showAll() {
+            mapSection.classList.remove('hidden');
+            chartsSection.classList.remove('hidden');
+            showAllBtn.classList.add('active');
+            hideMapBtn.classList.remove('active');
+            showChartsBtn.classList.remove('active');
+        }
+
+        function hideMap() {
+            mapSection.classList.add('hidden');
+            chartsSection.classList.remove('hidden');
+            showAllBtn.classList.remove('active');
+            hideMapBtn.classList.add('active');
+            showChartsBtn.classList.remove('active');
+        }
+
+        function showChartsOnly() {
+            mapSection.classList.add('hidden');
+            chartsSection.classList.remove('hidden');
+            showAllBtn.classList.remove('active');
+            hideMapBtn.classList.remove('active');
+            showChartsBtn.classList.add('active');
+        }
+
+        showAllBtn.onclick = showAll;
+        hideMapBtn.onclick = hideMap;
+        showChartsBtn.onclick = showChartsOnly;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') showAll();
+        });
+    </script>
+</body>
+</html>
